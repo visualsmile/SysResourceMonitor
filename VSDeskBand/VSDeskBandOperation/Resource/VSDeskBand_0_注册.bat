@@ -1,0 +1,1 @@
+regsvr32 -s "%~dp0VSDeskBand.dll"

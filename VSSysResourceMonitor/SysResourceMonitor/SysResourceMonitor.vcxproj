@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;include;..\..\VSFloatingWidget\VSFloatingWidget\Include;..\..\VSDeskBand\VSDeskBandOperation\Include;..\SysResourceMonitorService\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;VSDeskBandOperation.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;include;..\..\VSFloatingWidget\VSFloatingWidget\Include;..\..\VSDeskBand\VSDeskBandOperation\Include;..\SysResourceMonitorService\Include;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+    <PostBuildEvent>
+      <Command>"$(QTDIR)\bin\windeployqt.exe" "$(OutDir)$(ProjectName).exe"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBand_0_注册.bat" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBand_0_注册.bat"
+copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBand_1_注销.bat" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBand_1_注销.bat"
+copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBand.dll" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBand.dll"
+copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBandOperation.lib" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBandOperation.lib"
+copy "$(ProjectDir)Resources\SysResourceMonitor_0_RegEditor.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_0_RegEditor.bat"
+copy "$(ProjectDir)Resources\SysResourceMonitor_1_设置开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_1_设置开机自启.bat"
+copy "$(ProjectDir)Resources\SysResourceMonitor_2_取消开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_2_取消开机自启.bat"
+copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$(Configuration)\SRMDefaultConfig.json"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;include;..\..\VSDeskBand\VSDeskBandOperation\Include;..\..\VSFloatingWidget\VSFloatingWidget\Include;..\SysResourceMonitorService\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;VSDeskBandOperation.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;include;..\..\VSDeskBand\VSDeskBandOperation\Include;..\..\VSFloatingWidget\VSFloatingWidget\Include;..\SysResourceMonitorService\Include;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+    <PostBuildEvent>
+      <Command>"$(QTDIR)\bin\windeployqt.exe" "$(OutDir)$(ProjectName).exe"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBand_0_注册.bat" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBand_0_注册.bat"
+copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBand_1_注销.bat" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBand_1_注销.bat"
+copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBand.dll" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBand.dll"
+copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBandOperation.lib" "$(SolutionDir)$(Platform)\$(Configuration)\VSDeskBandOperation.lib"
+copy "$(ProjectDir)Resources\SysResourceMonitor_0_RegEditor.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_0_RegEditor.bat"
+copy "$(ProjectDir)Resources\SysResourceMonitor_1_设置开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_1_设置开机自启.bat"
+copy "$(ProjectDir)Resources\SysResourceMonitor_2_取消开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_2_取消开机自启.bat"
+copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$(Configuration)\SRMDefaultConfig.json"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <QtMoc Include="Include\SysResourceMonitor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resources\SysResourceMonitor.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Images\AutoRun.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="Resources\Images\Check.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="Resources\Images\CustomSetting.png" />
+    <Image Include="Resources\Images\DeskBandSetting.png" />
+    <Image Include="Resources\Images\Help.png" />
+    <Image Include="Resources\Images\Quit.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="Resources\Images\ServiceSetting.png" />
+    <Image Include="Resources\Images\SysResourceMonitor.ico">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="Resources\Images\SysResourceMonitor.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="Resources\Images\UnCheck.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="Resources\Images\WidgetMode.png" />
+    <Image Include="Resources\Images\WidgetPosition.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\VSFloatingWidget\VSFloatingWidget\Source\VSFloatingWidget.cpp" />
+    <ClCompile Include="Include\Observer\Net\SRMNetworkObserver.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Observer\CPU\SRMCPURateObserver.cpp" />
+    <ClCompile Include="Source\Observer\CPU\SRMCPUTemperatureObserver.cpp" />
+    <ClCompile Include="Source\Observer\GPU\Nvidia\SRMNvidiaGPUInfo.cpp" />
+    <ClCompile Include="Source\Observer\GPU\SRMGPUMemRateObserver.cpp" />
+    <ClCompile Include="Source\Observer\GPU\SRMGPURateObserver.cpp" />
+    <ClCompile Include="Source\Observer\GPU\SRMGPUTemperatureObserver.cpp" />
+    <ClCompile Include="Source\Observer\Mem\SRMMemRateObserver.cpp" />
+    <ClCompile Include="Source\Observer\SRMModuleSubject.cpp" />
+    <ClCompile Include="Source\Observer\SRMObserverBase.cpp" />
+    <ClCompile Include="Source\Observer\SRMServiceReadObserverBase.cpp" />
+    <ClCompile Include="Source\SRMConfig.cpp" />
+    <ClCompile Include="Source\SRMRegManager.cpp" />
+    <ClCompile Include="Source\SRMServiceOperation.cpp" />
+    <ClCompile Include="Source\SysResourceMonitor.cpp" />
+    <ClCompile Include="Source\UI\SRMCustomSettingDialog.cpp" />
+    <ClCompile Include="Source\UI\SRMFloatingWidget.cpp" />
+    <ClCompile Include="Source\UI\SRMHelpDialog.cpp" />
+    <ClCompile Include="Source\UI\SRMSystemTray.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\UI\SRMHelpDialog.h" />
+    <QtMoc Include="..\..\VSFloatingWidget\VSFloatingWidget\Include\VSFloatingWidget.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include</IncludePath>
+    </QtMoc>
+    <ClInclude Include="Include\Observer\CPU\SRMCPURateObserver.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include;.\..\..\VSDeskBand\VSDeskBandOperation\Include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSDeskBand\VSDeskBandOperation\Include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include</IncludePath>
+    </ClInclude>
+    <QtMoc Include="Include\Observer\SRMModuleSubject.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include;.\..\..\VSDeskBand\VSDeskBandOperation\Include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSDeskBand\VSDeskBandOperation\Include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include</IncludePath>
+    </QtMoc>
+    <QtMoc Include="Include\Observer\SRMObserverBase.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include;.\..\..\VSDeskBand\VSDeskBandOperation\Include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSDeskBand\VSDeskBandOperation\Include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include</IncludePath>
+    </QtMoc>
+    <ClInclude Include="Include\Observer\CPU\SRMCPUTemperatureObserver.h" />
+    <ClInclude Include="Include\Observer\GPU\Nvidia\SRMNvidiaGPUInfo.h" />
+    <ClInclude Include="Include\Observer\GPU\SRMGPUMemRateObserver.h" />
+    <ClInclude Include="Include\Observer\GPU\SRMGPURateObserver.h" />
+    <ClInclude Include="Include\Observer\GPU\SRMGPUTemperatureObserver.h" />
+    <ClInclude Include="Include\Observer\Mem\SRMMemRateObserver.h" />
+    <ClInclude Include="Include\Observer\Net\SRMNetworkObserver.h" />
+    <ClInclude Include="Include\Observer\SRMServiceReadObserverBase.h" />
+    <ClInclude Include="Include\SRMConfig.h" />
+    <ClInclude Include="Include\SRMError.h" />
+    <ClInclude Include="Include\SRMRegManager.h" />
+    <ClInclude Include="Include\SRMServiceOperation.h" />
+    <ClInclude Include="Include\UI\Common\VSCustomMenu.h" />
+    <ClInclude Include="Include\UI\SRMCustomSettingDialog.h" />
+    <ClInclude Include="Include\UI\SRMFloatingWidget.h" />
+    <QtMoc Include="Include\UI\SRMSystemTray.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include;.\..\..\VSDeskBand\VSDeskBandOperation\Include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include;.\..\..\VSDeskBand\VSDeskBandOperation\Include;.\..\..\VSFloatingWidget\VSFloatingWidget\Include</IncludePath>
+    </QtMoc>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_x64="msvc2017_64" MocOptions="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

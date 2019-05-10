@@ -1,0 +1,65 @@
+{
+    "DeskBand": {
+        "ShowDeskBand": true
+    },
+    "SRMCPURateObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 50,
+        "v2": 75
+    },
+    "SRMCPUTemperatureObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 50,
+        "v2": 75
+    },
+    "SRMFloatingWidget": {
+        "CurPosition": "968,0",
+        "ShowMode": 3
+    },
+    "SRMGPUMemRateObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 50,
+        "v2": 75
+    },
+    "SRMGPURateObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 50,
+        "v2": 75
+    },
+    "SRMGPUTemperatureObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 50,
+        "v2": 75
+    },
+    "SRMMemRateObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 50,
+        "v2": 75
+    },
+    "SRMNetworkObserver": {
+        "checked": true,
+        "color1": "0,255,0,255",
+        "color2": "255,128,0,255",
+        "color3": "255,0,0,255",
+        "v1": 3,
+        "v2": 6
+    }
+}

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files\QtService">
+      <UniqueIdentifier>{317c4542-a055-42cf-b214-915f3657ab01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QtService">
+      <UniqueIdentifier>{e74e5356-ed5b-4a07-8309-5fdba760c722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Observer">
+      <UniqueIdentifier>{adfcc332-c74a-48be-803c-ae512e1b0764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Observer\CPU">
+      <UniqueIdentifier>{0bc49863-d0d2-41aa-8914-d21fd19ac58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Observer">
+      <UniqueIdentifier>{49c01040-5272-4863-add4-d84dc2425a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Observer\CPU">
+      <UniqueIdentifier>{acb4e01d-c8eb-49b9-bc94-1494a3eb3011}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\qtservice\src\qtservice.cpp">
+      <Filter>Source Files\QtService</Filter>
+    </QtMoc>
+    <QtMoc Include="..\qtservice\src\qtservice_win.cpp">
+      <Filter>Source Files\QtService</Filter>
+    </QtMoc>
+    <QtMoc Include="Include\Observer\SRMServiceObserverBase.h">
+      <Filter>Header Files\Observer</Filter>
+    </QtMoc>
+    <QtMoc Include="Include\Observer\SRMServiceSubject.h">
+      <Filter>Header Files\Observer</Filter>
+    </QtMoc>
+    <QtMoc Include="Include\SysResourceMonitorService.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\qtservice\src\qtservice.h">
+      <Filter>Header Files\QtService</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qtservice\src\qtservice_p.h">
+      <Filter>Header Files\QtService</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\CPU\SRMCPUTemperatureServiceObserver.h">
+      <Filter>Header Files\Observer\CPU</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\SysResourceMonitorService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\SRMServiceObserverBase.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\SRMServiceSubject.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\CPU\SRMCPUTemperatureServiceObserver.cpp">
+      <Filter>Source Files\Observer\CPU</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

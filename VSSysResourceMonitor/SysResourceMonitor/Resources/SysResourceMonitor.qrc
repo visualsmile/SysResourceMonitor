@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/AutoRun.png</file>
+        <file>Images/Check.png</file>
+        <file>Images/Quit.png</file>
+        <file>Images/SysResourceMonitor.ico</file>
+        <file>Images/SysResourceMonitor.png</file>
+        <file>Images/UnCheck.png</file>
+        <file>Images/CustomSetting.png</file>
+        <file>Images/DeskBandSetting.png</file>
+        <file>Images/Help.png</file>
+        <file>Images/ServiceSetting.png</file>
+        <file>Images/WidgetMode.png</file>
+        <file>Images/WidgetPosition.png</file>
+    </qresource>
+</RCC>

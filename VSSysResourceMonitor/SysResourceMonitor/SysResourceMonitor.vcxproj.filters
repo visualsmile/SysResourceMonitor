@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{982308d2-ac00-4db9-af15-97748ebb7033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{eb439152-3c2d-4bef-90e8-b2f20b17c4d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{4fcbff5c-2553-43e4-addf-d6c52721c956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Include\UI">
+      <UniqueIdentifier>{5ed631d5-e052-49c1-b0d6-2ba89caafcf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{21692066-1fc1-4465-967d-6e0c8abe54e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Observer">
+      <UniqueIdentifier>{89d9649d-e7ce-4fbe-b37e-53bdecde0119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer">
+      <UniqueIdentifier>{1bc204b0-4555-46b5-885f-acd559f5468b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Observer\CPU">
+      <UniqueIdentifier>{26474f12-6e53-4469-b7dc-1623d2f7d763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Observer\GPU">
+      <UniqueIdentifier>{74693315-6457-4c37-9fe1-fc89c46ef899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Observer\Net">
+      <UniqueIdentifier>{6eea1ecc-9e7b-4010-9906-6455728d03b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\CPU">
+      <UniqueIdentifier>{eb5d1e6a-10ef-49dc-be5d-e5982cd4c3ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\GPU">
+      <UniqueIdentifier>{496307ee-2b29-481c-9b12-f9fbe0ff4405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\Net">
+      <UniqueIdentifier>{45fc0489-1f72-4373-bcb0-23ccf19b7fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI\Common">
+      <UniqueIdentifier>{ccbb0ee2-a2e1-4af5-8d6c-db5afb4b4145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\UI\Common">
+      <UniqueIdentifier>{7d3dbf7a-5ac2-4f29-8447-9320e42986e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Observer\Mem">
+      <UniqueIdentifier>{547f0bea-0a64-478b-a7bb-2301947f2c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\Mem">
+      <UniqueIdentifier>{7f3d9783-22e7-4457-8686-155c5a515d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Observer\GPU\Nvidia">
+      <UniqueIdentifier>{160b89d9-07fe-4d1b-8373-1cf3b3b55ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\GPU\Nvidia">
+      <UniqueIdentifier>{61594ed3-e797-4adc-b091-1d0669b2af16}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Include\SysResourceMonitor.h">
+      <Filter>Include</Filter>
+    </QtMoc>
+    <QtMoc Include="Include\Observer\SRMObserverBase.h">
+      <Filter>Include\Observer</Filter>
+    </QtMoc>
+    <QtMoc Include="Include\Observer\SRMModuleSubject.h">
+      <Filter>Include\Observer</Filter>
+    </QtMoc>
+    <QtMoc Include="Include\UI\SRMSystemTray.h">
+      <Filter>Include\UI</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\VSFloatingWidget\VSFloatingWidget\Include\VSFloatingWidget.h">
+      <Filter>Include\UI\Common</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Images\AutoRun.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\Check.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\Quit.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\SysResourceMonitor.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\SysResourceMonitor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\UnCheck.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\CustomSetting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\DeskBandSetting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\Help.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\ServiceSetting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\WidgetMode.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\WidgetPosition.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resources\SysResourceMonitor.qrc">
+      <Filter>Resource</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SysResourceMonitor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\SRMFloatingWidget.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SRMConfig.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SRMRegManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\SRMModuleSubject.cpp">
+      <Filter>Source\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\SRMObserverBase.cpp">
+      <Filter>Source\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\CPU\SRMCPURateObserver.cpp">
+      <Filter>Source\Observer\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\SRMSystemTray.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\VSFloatingWidget\VSFloatingWidget\Source\VSFloatingWidget.cpp">
+      <Filter>Source\UI\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\SRMServiceReadObserverBase.cpp">
+      <Filter>Source\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\CPU\SRMCPUTemperatureObserver.cpp">
+      <Filter>Source\Observer\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\Mem\SRMMemRateObserver.cpp">
+      <Filter>Source\Observer\Mem</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Observer\Net\SRMNetworkObserver.cpp">
+      <Filter>Source\Observer\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\GPU\Nvidia\SRMNvidiaGPUInfo.cpp">
+      <Filter>Source\Observer\GPU\Nvidia</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\GPU\SRMGPURateObserver.cpp">
+      <Filter>Source\Observer\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\GPU\SRMGPUTemperatureObserver.cpp">
+      <Filter>Source\Observer\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\GPU\SRMGPUMemRateObserver.cpp">
+      <Filter>Source\Observer\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SRMServiceOperation.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\SRMHelpDialog.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\SRMCustomSettingDialog.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\SRMConfig.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SRMError.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SRMRegManager.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\SRMFloatingWidget.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\CPU\SRMCPURateObserver.h">
+      <Filter>Include\Observer\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Common\VSCustomMenu.h">
+      <Filter>Include\UI\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\SRMServiceReadObserverBase.h">
+      <Filter>Include\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\CPU\SRMCPUTemperatureObserver.h">
+      <Filter>Include\Observer\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\Mem\SRMMemRateObserver.h">
+      <Filter>Include\Observer\Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\Net\SRMNetworkObserver.h">
+      <Filter>Include\Observer\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\GPU\Nvidia\SRMNvidiaGPUInfo.h">
+      <Filter>Include\Observer\GPU\Nvidia</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\GPU\SRMGPURateObserver.h">
+      <Filter>Include\Observer\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\GPU\SRMGPUTemperatureObserver.h">
+      <Filter>Include\Observer\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\GPU\SRMGPUMemRateObserver.h">
+      <Filter>Include\Observer\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SRMServiceOperation.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\SRMHelpDialog.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\SRMCustomSettingDialog.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
