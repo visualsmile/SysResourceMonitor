@@ -8,14 +8,13 @@
 已添加IntelCPU、Nvidia GPU、网速信息显示
 
 可自行拓展
-win10 效果
-https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/win10.png
-win7 效果（win7默认任务栏透明会导致颜色显示不准，截图中将任务栏透明背景设置为接近不透明；目前没有找到处理方案）
-https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/win7.png
-浮窗 效果
-https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/浮窗.png
-自定义颜色设置 窗口
-https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/自定义颜色设置.png
+![win10 效果](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/win10.png)
+
+![win7 效果（win7默认任务栏透明会导致颜色显示不准，截图中将任务栏透明背景设置为接近不透明；目前没有找到处理方案）](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/win7.png)
+
+![浮窗 效果](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/浮窗.png)
+
+![自定义颜色设置 窗口](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/自定义颜色设置.png)
 
 
 
