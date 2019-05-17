@@ -43,7 +43,8 @@ private:
     HFONT& borrowFontInfo(int nTextHeight);
 
 private:
-	int calcTextHeight();
+	int calcTaskBarHeight();
+	int calcTextHeight(int nTaskBarHeight);
 	int calcColWidth(HDC hCacheDC, int nCol);
 
 private:

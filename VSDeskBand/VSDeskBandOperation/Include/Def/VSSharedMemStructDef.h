@@ -68,8 +68,8 @@ public:
 	wstring m_sInfo;		// 内容
 };
 
-#define MAX_SIZE_ROW 10 // 定义最大10行
-#define MAX_SIZE_COL 10 // 定义最大10列
+#define MAX_SIZE_ROW 2	// 定义最大2行
+#define MAX_SIZE_COL 40 // 定义最大40列
 class VSSharedMemStruct
 {
 public:

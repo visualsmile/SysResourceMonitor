@@ -181,7 +181,7 @@ SIZE VSDeskBandWindow::getDeskBandWindowMinSize(BOOL bNormalViewMode)
     // 计算显示所有信息需要的窗口宽度
     if (m_oSharedMemStruct.getColCount() > 0)
     {
-        HFONT& hFontTemp = borrowFontInfo(calcTextHeight());
+        HFONT& hFontTemp = borrowFontInfo(calcTextHeight(calcTaskBarHeight()));
         HDC hCacheDC = CreateCompatibleDC(NULL);  // 构造一个设备句柄，并设置字体,用来计算字体宽度
 		HFONT hOldCacheFont = (HFONT)SelectObject(hCacheDC, hFontTemp);    	
 
@@ -281,7 +281,8 @@ LRESULT VSDeskBandWindow::OnPaint()
 	HBITMAP hOldCacheBitMap = (HBITMAP)SelectObject(hCacheDC, hCacheBitMap);*/
 
 	// 2. 设置字体
-	int nTextHeight = calcTextHeight();
+	int nTaskBarHeight = calcTaskBarHeight();
+	int nTextHeight = calcTextHeight(nTaskBarHeight);
 	/*HFONT hOldCacheFont = (HFONT)*/SelectObject(/*hCacheDC*/oPaintStruct.hdc, borrowFontInfo(nTextHeight));
 
 	// 3. 绘制背景
@@ -290,7 +291,8 @@ LRESULT VSDeskBandWindow::OnPaint()
 	// 4. 绘制文字(采用列对齐的方式)
 	//HTHEME hTheme = OpenThemeData(NULL, L"TextStyle");
 	int nLeft = m_oSharedMemStruct.getLeftSpace();
-	int nTop = int(nTextHeight * 0.1 + 0.5); // 向上取整
+	int nTop = (nTaskBarHeight - nTextHeight * m_oSharedMemStruct.getRowCount()) / 2;
+	if (nTop < 0) nTop = 0;
 	for (int nCol = 0; nCol < m_oSharedMemStruct.getColCount(); ++nCol)
 	{
 		nLeft += paintOneCol(/*hTheme, *//*hCacheDC*/oPaintStruct.hdc, nLeft, nTop, nCol);
@@ -366,7 +368,7 @@ HFONT& VSDeskBandWindow::borrowFontInfo(int nTextHeight)
 		0,                                      // nWidth       宽度，取默认
 		0,                                      // nEscapement  倾斜
 		0,                                      // nOrientation 倾斜
-		FW_DONTCARE,                            // nWeight       粗细
+		FW_THIN,                                // nWeight       粗细
 		false,                                  // bItalic      斜体
 		false,                                  // bUnderline   下划线
 		false,                                  // cStrikeOut   删除线
@@ -381,13 +383,25 @@ HFONT& VSDeskBandWindow::borrowFontInfo(int nTextHeight)
 	return m_oFontList.front().second;
 }
 
-int VSDeskBandWindow::calcTextHeight()
+int VSDeskBandWindow::calcTaskBarHeight()
 {
 	RECT oRect = { 0 };
 	SystemParametersInfo(SPI_GETWORKAREA, 0, &oRect, 0);
-	int nTaskBandHeight = GetSystemMetrics(SM_CYSCREEN) - oRect.bottom;
-	int nTextHeight = int(nTaskBandHeight / m_oSharedMemStruct.getRowCount() * 0.9); // 向下取整
-	return nTextHeight;
+	return GetSystemMetrics(SM_CYSCREEN) - oRect.bottom;	
+}
+
+//************************************
+// Remark:    字体太小没啥意义，不考虑超过两行的情况
+// FullName:  VSDeskBandWindow::calcTextHeight
+// Returns:   int
+// Parameter: int nTaskBarHeight
+//************************************
+int VSDeskBandWindow::calcTextHeight(int nTaskBarHeight)
+{
+	if (nTaskBarHeight <= 40)
+		return nTaskBarHeight / 2;
+	else
+		return 20;
 }
 
 int VSDeskBandWindow::calcColWidth(HDC hCacheDC, int nCol)
