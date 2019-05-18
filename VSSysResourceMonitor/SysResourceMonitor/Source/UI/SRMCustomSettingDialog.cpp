@@ -26,7 +26,7 @@ SRMCustomSettingDialog::~SRMCustomSettingDialog()
 
 void SRMCustomSettingDialog::initProp()
 {
-	this->setFixedWidth(550);
+	this->setFixedWidth(570);
 	this->setWindowTitle(QString::fromStdWString(L"SRMResourceMonitor 自定义颜色设置"));
 	this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	this->setAttribute(Qt::WA_DeleteOnClose, false);
@@ -35,16 +35,24 @@ void SRMCustomSettingDialog::initProp()
 }
 
 void SRMCustomSettingDialog::initLayout()
-{
-	QVBoxLayout* pMainLayout = new QVBoxLayout;
-
+{	
+	QVBoxLayout* pScrollAreaLayout = new QVBoxLayout;
 	QList<ISRMCustomSettingInf*>& oCustomSettingInfList = SRMModuleSubject::getInstance()->doCustomSettingInfList();
 	foreach (ISRMCustomSettingInf * p, oCustomSettingInfList)
 	{
 		SRMCustomSettingItem* pItem = new SRMCustomSettingItem(p, this);
-		pMainLayout->addWidget(pItem);
+		pScrollAreaLayout->addWidget(pItem);
 	}
+	
+	QWidget* pScrollWidget = new QWidget(this);
+	pScrollWidget->setLayout(pScrollAreaLayout);
 
+	QScrollArea* pScrollArea = new QScrollArea(this);
+	pScrollArea->setWidget(pScrollWidget);
+	pScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+	QVBoxLayout* pMainLayout = new QVBoxLayout;
+	pMainLayout->addWidget(pScrollArea);
 	this->setLayout(pMainLayout);
 }
 
@@ -112,6 +120,7 @@ void SRMCustomSettingItem::initLayout()
 
 void SRMCustomSettingItem::initProp()
 {
+	this->setFixedWidth(500);
 	this->setFrameShape(QFrame::Box);
 }
 

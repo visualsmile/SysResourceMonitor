@@ -8,6 +8,7 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QEvent>
+#include <QScrollArea>
 
 class ISRMCustomSettingInf;
 
