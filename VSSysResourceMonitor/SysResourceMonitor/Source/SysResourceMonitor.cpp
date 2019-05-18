@@ -20,6 +20,8 @@ SysResourceMonitor::~SysResourceMonitor()
 
 	if (m_pSystemTray)
 		delete m_pSystemTray;
+
+	SRMModuleSubject::getInstance()->release();
 }
 
 void SysResourceMonitor::doWork()
@@ -49,7 +51,7 @@ void SysResourceMonitor::update()
 
 void SysResourceMonitor::updateWidget()
 {
-	int nCount = SRMModuleSubject::getInstance()->getCheckedCount();
+	int nCount = SRMModuleSubject::getInstance()->doCheckedCount();
 	if (nCount == m_oLabelList.size())
 		return;
 
@@ -58,7 +60,7 @@ void SysResourceMonitor::updateWidget()
 
 void SysResourceMonitor::updateDeskBand()
 {
-	int nCount = SRMModuleSubject::getInstance()->getCheckedCount();
+	int nCount = SRMModuleSubject::getInstance()->doCheckedCount();
 	if (nCount == m_pVSSharedMemStruct->getColCount())
 	{
 		VSDeskBandOperation::getInstance()->updateMessage(m_pVSSharedMemStruct);

@@ -1,9 +1,10 @@
-#include <QtWidgets/QApplication>
 #include <windows.h>
-#include "SysResourceMonitor.h"
-#include "SRMError.h"
+#include <QtWidgets/QApplication>
 #include <QMessageBox>
 #include <QDir>
+#include "SRMError.h"
+#include "SRMScopeOnExit.h"
+#include "SysResourceMonitor.h"
 
 // 判断程序之间的互斥, 只能打开一个软件
 bool checkUnique()
@@ -28,16 +29,25 @@ bool checkUnique()
 
 int main(int argc, char* argv[])
 {
+	// 1. com组件统一初始化，其他地方不要再初始化
+	HRESULT hResult =  CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	SCOPE_EXIT{ CoUninitialize(); };
+
+	if (hResult != S_OK) 
+		return -1;	
+
+	// 2. 不支持多进程
 	if (!checkUnique()){
 		return 0;
 	}
 
+	// 3. 主程序
 	QApplication a(argc, argv);
 	QDir::setCurrent(qApp->applicationDirPath());
 	try{
 		SysResourceMonitor w;
 		w.setWindowIcon(QIcon(":/Images/SysResourceMonitor.png"));
-		w.hide();
+		w.hide(); // 主窗体不显示
 		w.doWork();
 		return a.exec();
 	}

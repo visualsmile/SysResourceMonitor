@@ -9,7 +9,7 @@
 #include <QColor>
 #include <QEvent>
 
-class SRMObserverBase;
+class ISRMCustomSettingInf;
 
 // QColorDialog 关闭时，会关闭程序，处理下
 class SRMColorDialog : public QColorDialog
@@ -22,7 +22,7 @@ public:
 class SRMCustomSettingItem : public QFrame
 {
 public:
-	SRMCustomSettingItem(SRMObserverBase *pObserver, QWidget* pParent);
+	SRMCustomSettingItem(ISRMCustomSettingInf* pCustomSettingInf, QWidget* pParent);
 	~SRMCustomSettingItem();
 
 private:
@@ -35,7 +35,7 @@ private:
 	void v2ValueChangedSlot(QString sValue);
 
 private:
-	SRMObserverBase* m_pObserver;
+	ISRMCustomSettingInf* m_pCustomSettingInf;
 };
 
 class SRMCustomSettingDialog : public QDialog

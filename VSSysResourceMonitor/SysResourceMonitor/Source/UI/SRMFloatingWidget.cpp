@@ -51,7 +51,7 @@ QList<QLabel*> SRMFloatingWidget::updateLayout()
 	}
 	m_oLabelList.clear();
 
-	int nCount = SRMModuleSubject::getInstance()->getCheckedCount();
+	int nCount = SRMModuleSubject::getInstance()->doCheckedCount();
 	for (int nIndex = 0; nIndex < nCount; ++nIndex)
 	{
 		QLabel* pLabel = new QLabel(this);

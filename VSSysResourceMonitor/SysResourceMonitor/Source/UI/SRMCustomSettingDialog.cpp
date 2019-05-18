@@ -38,8 +38,8 @@ void SRMCustomSettingDialog::initLayout()
 {
 	QVBoxLayout* pMainLayout = new QVBoxLayout;
 
-	QList<SRMObserverBase*>& oObserverList = SRMModuleSubject::getInstance()->getObserverList();
-	foreach (SRMObserverBase* p, oObserverList)
+	QList<ISRMCustomSettingInf*>& oCustomSettingInfList = SRMModuleSubject::getInstance()->doCustomSettingInfList();
+	foreach (ISRMCustomSettingInf * p, oCustomSettingInfList)
 	{
 		SRMCustomSettingItem* pItem = new SRMCustomSettingItem(p, this);
 		pMainLayout->addWidget(pItem);
@@ -48,9 +48,9 @@ void SRMCustomSettingDialog::initLayout()
 	this->setLayout(pMainLayout);
 }
 
-SRMCustomSettingItem::SRMCustomSettingItem(SRMObserverBase* pObserver, QWidget* pParent)
+SRMCustomSettingItem::SRMCustomSettingItem(ISRMCustomSettingInf* pCustomSettingInf, QWidget* pParent)
 	: QFrame(pParent)
-	, m_pObserver(pObserver)
+	, m_pCustomSettingInf(pCustomSettingInf)
 {
 	initLayout();
 	initProp();
@@ -74,31 +74,31 @@ void SRMCustomSettingItem::initLayout()
 		return pPushButton;
 	};
 
-	QLabel* pLabelDescription = new QLabel(m_pObserver->customSettingDescription(), this);
+	QLabel* pLabelDescription = new QLabel(m_pCustomSettingInf->customSettingDescription(), this);
 
 	QHBoxLayout* pSetttingLayout = new QHBoxLayout;
 
 	QLabel* pLabelMin = new QLabel("0", this);
 	pSetttingLayout->addWidget(pLabelMin);
 
-	pSetttingLayout->addWidget(createAction(1, m_pObserver->color1()));
+	pSetttingLayout->addWidget(createAction(1, m_pCustomSettingInf->color1()));
 
 	QIntValidator* pIntValidator = new QIntValidator(this);
-	QLineEdit* pLineEditV1 = new QLineEdit(QString::number(m_pObserver->v1()), this);
+	QLineEdit* pLineEditV1 = new QLineEdit(QString::number(m_pCustomSettingInf->v1()), this);
 	pLineEditV1->setValidator(pIntValidator);
 	pLineEditV1->setStyleSheet("color:black");
 	pSetttingLayout->addWidget(pLineEditV1);
 	connect(pLineEditV1, &QLineEdit::textEdited, this, &SRMCustomSettingItem::v1ValueChangedSlot, Qt::UniqueConnection);
 
-	pSetttingLayout->addWidget(createAction(2, m_pObserver->color2()));
+	pSetttingLayout->addWidget(createAction(2, m_pCustomSettingInf->color2()));
 
-	QLineEdit* pLineEditV2 = new QLineEdit(QString::number(m_pObserver->v2()), this);
+	QLineEdit* pLineEditV2 = new QLineEdit(QString::number(m_pCustomSettingInf->v2()), this);
 	pLineEditV2->setValidator(pIntValidator);
 	pLineEditV2->setStyleSheet("color:black");
 	pSetttingLayout->addWidget(pLineEditV2);
 	connect(pLineEditV2, &QLineEdit::textEdited, this, &SRMCustomSettingItem::v2ValueChangedSlot, Qt::UniqueConnection);
 
-	pSetttingLayout->addWidget(createAction(3, m_pObserver->color3()));
+	pSetttingLayout->addWidget(createAction(3, m_pCustomSettingInf->color3()));
 
 	QLabel* pLabelMax = new QLabel("MAX", this);
 	pSetttingLayout->addWidget(pLabelMax);
@@ -125,13 +125,13 @@ void SRMCustomSettingItem::colorPushbuttonClickedSlot()
 	switch (pPushbutton->property("colorID").toInt())
 	{
 	case 1:
-		oColor = m_pObserver->color1();
+		oColor = m_pCustomSettingInf->color1();
 		break;
 	case 2:
-		oColor = m_pObserver->color2();
+		oColor = m_pCustomSettingInf->color2();
 		break;
 	case 3:
-		oColor = m_pObserver->color3();
+		oColor = m_pCustomSettingInf->color3();
 		break;
 	default:
 		break;
@@ -144,13 +144,13 @@ void SRMCustomSettingItem::colorPushbuttonClickedSlot()
 	switch (pPushbutton->property("colorID").toInt())
 	{
 	case 1:
-		m_pObserver->setColor1(oColor);
+		m_pCustomSettingInf->setColor1(oColor);
 		break;
 	case 2:
-		m_pObserver->setColor2(oColor);
+		m_pCustomSettingInf->setColor2(oColor);
 		break;
 	case 3:
-		m_pObserver->setColor3(oColor);
+		m_pCustomSettingInf->setColor3(oColor);
 		break;
 	default:
 		break;
@@ -188,13 +188,13 @@ void SRMCustomSettingItem::v1ValueChangedSlot(QString sValue)
 		return;
 	}
 
-	if (nValue > m_pObserver->v2())
+	if (nValue > m_pCustomSettingInf->v2())
 	{
 		setReject();
 		return;
 	}
 
-	m_pObserver->setV1(nValue);
+	m_pCustomSettingInf->setV1(nValue);
 	setAccept();
 }
 
@@ -221,13 +221,13 @@ void SRMCustomSettingItem::v2ValueChangedSlot(QString sValue)
 	}
 
 	int nValue = sValue.toInt();
-	if (nValue < m_pObserver->v1())
+	if (nValue < m_pCustomSettingInf->v1())
 	{
 		setReject();
 		return;
 	}
 
-	m_pObserver->setV2(nValue);
+	m_pCustomSettingInf->setV2(nValue);
 	setAccept();
 }
 

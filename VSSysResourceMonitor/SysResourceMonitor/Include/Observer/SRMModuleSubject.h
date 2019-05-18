@@ -10,6 +10,7 @@
 #include <QLabel>
 
 class SRMObserverBase;
+class ISRMCustomSettingInf;
 class VSSharedMemStruct;
 class QMenu;
 
@@ -23,15 +24,41 @@ class SRMModuleSubject : public QObject
 {
 	Q_OBJECT
 
-public:
+public:// 代理的一些事情
+	//************************************
+	// Remark:    通知更新
+	// FullName:  SRMModuleSubject::doOntify
+	// Returns:   void
+	// Parameter: VSSharedMemStruct * pSharedMemStruct	标尺控件
+	// Parameter: QList<QLabel * > & oLabelList			浮窗控件
+	//************************************
+	void doOntify(VSSharedMemStruct* pSharedMemStruct, QList<QLabel*>& oLabelList);
+	//************************************
+	// Remark:    注册右键菜单
+	// FullName:  SRMModuleSubject::doRegTrayMenu
+	// Returns:   void
+	// Parameter: QMenu * pTrayMenu
+	//************************************
+	void doRegTrayMenu(QMenu* pTrayMenu);
+	//************************************
+	// Remark:    统计选中的条目，用于标尺、浮窗控件初始化
+	// FullName:  SRMModuleSubject::doCheckedCount
+	// Returns:   int
+	//************************************
+	int doCheckedCount();
+	//************************************
+	// Remark:    获取自定义设置接口，用于自定义设置功能
+	// FullName:  SRMModuleSubject::doCustomSettingInfList
+	// Returns:   QList<ISRMCustomSettingInf*>
+	//************************************
+	QList<ISRMCustomSettingInf*> doCustomSettingInfList();	
+
+public:// 资源管理
 	static SRMModuleSubject* getInstance();
 	void init();
-	int getCheckedCount();
-	void doOntify(VSSharedMemStruct* pSharedMemStruct, QList<QLabel*>& oLabelList);
-	void regTrayMenu(QMenu* pTrayMenu);
-	QList<SRMObserverBase*>& getObserverList();
+	void release();
 
-public:
+public:// 观察者注册用
 	void regObserverFactory(SRMObserverFactory* pObserverFactory);
 
 private:
@@ -40,7 +67,7 @@ private:
 
 private:
 	QList<SRMObserverBase*> m_oObserverList;
-	QList<SRMObserverFactory*> m_oObserverFactoryList; // 增加一个factory吧，避免 observer被过早初始化
+	QList<SRMObserverFactory*> m_oObserverFactoryList; // 增加一个factory，避免 observer被过早初始化
 };
 
 #define REG_SRM_OBSERVER(observer)\

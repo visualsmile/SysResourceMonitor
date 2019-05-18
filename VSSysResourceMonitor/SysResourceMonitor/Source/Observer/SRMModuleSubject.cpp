@@ -8,6 +8,21 @@ SRMModuleSubject* SRMModuleSubject::getInstance()
 	return &s_oSRMModuleSubject;
 }
 
+void SRMModuleSubject::release()
+{
+	foreach(SRMObserverBase* p, m_oObserverList)
+	{
+		delete p;
+	}
+	m_oObserverList.clear();
+
+	foreach(SRMObserverFactory* p, m_oObserverFactoryList)
+	{
+		delete p;
+	}
+	m_oObserverFactoryList.clear();
+}
+
 void SRMModuleSubject::init()
 {
 	static bool bInited = false;
@@ -43,13 +58,12 @@ void SRMModuleSubject::init()
 	}
 }
 
-int SRMModuleSubject::getCheckedCount()
+int SRMModuleSubject::doCheckedCount()
 {
 	int nCount = 0;
 	foreach(SRMObserverBase * p, m_oObserverList)
 	{
-		if (p->isChecked())
-			nCount++;
+		nCount += p->checkedCount();
 	}
 
 	return nCount;
@@ -62,15 +76,6 @@ SRMModuleSubject::SRMModuleSubject()
 
 SRMModuleSubject::~SRMModuleSubject()
 {
-	foreach(SRMObserverBase * p, m_oObserverList)
-	{
-		delete p;
-	}
-
-	foreach(SRMObserverFactory* p, m_oObserverFactoryList)
-	{
-		delete p;
-	}
 }
 
 void SRMModuleSubject::doOntify(VSSharedMemStruct* pSharedMemStruct, QList<QLabel*>& oLabelList)
@@ -78,12 +83,16 @@ void SRMModuleSubject::doOntify(VSSharedMemStruct* pSharedMemStruct, QList<QLabe
 	int nIndex = 0;
 	foreach(SRMObserverBase* p, m_oObserverList)
 	{
-		if (p->isChecked())
-			p->update(nIndex++, pSharedMemStruct, oLabelList);
+		int nCheckedCount = p->checkedCount();
+		if (nCheckedCount > 0)
+		{
+			p->update(nIndex, pSharedMemStruct, oLabelList);
+			nIndex += nCheckedCount;
+		}	
 	}
 }
 
-void SRMModuleSubject::regTrayMenu(QMenu* pTrayMenu)
+void SRMModuleSubject::doRegTrayMenu(QMenu* pTrayMenu)
 {
 	foreach(SRMObserverBase * p, m_oObserverList)
 	{
@@ -91,9 +100,14 @@ void SRMModuleSubject::regTrayMenu(QMenu* pTrayMenu)
 	}
 }
 
-QList<SRMObserverBase*>& SRMModuleSubject::getObserverList()
+QList<ISRMCustomSettingInf*> SRMModuleSubject::doCustomSettingInfList()
 {
-	return m_oObserverList;
+	QList<ISRMCustomSettingInf*> oResultList;
+	foreach(SRMObserverBase* p, m_oObserverList)
+	{
+		oResultList.append(p->customSettingInfList());
+	}
+	return oResultList;
 }
 
 void SRMModuleSubject::regObserverFactory(SRMObserverFactory* pObserverFactory)

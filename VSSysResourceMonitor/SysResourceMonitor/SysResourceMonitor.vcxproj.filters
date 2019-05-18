@@ -77,6 +77,12 @@
     <Filter Include="Source\Observer\GPU\Nvidia">
       <UniqueIdentifier>{61594ed3-e797-4adc-b091-1d0669b2af16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Observer\Disk">
+      <UniqueIdentifier>{75f89d85-39d4-4150-9c35-41d352df598a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\Disk">
+      <UniqueIdentifier>{74f7a375-912b-4b99-985c-fe90085c5706}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Include\SysResourceMonitor.h">
@@ -202,6 +208,12 @@
     <ClCompile Include="Source\UI\SRMCustomSettingDialog.cpp">
       <Filter>Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Observer\Disk\SRMDiskRateObserver.cpp">
+      <Filter>Source\Observer\Disk</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Observer\Disk\SRMDiskRateSubObserver.cpp">
+      <Filter>Source\Observer\Disk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\SRMConfig.h">
@@ -254,6 +266,15 @@
     </ClInclude>
     <ClInclude Include="Include\UI\SRMCustomSettingDialog.h">
       <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\Disk\SRMDiskRateObserver.h">
+      <Filter>Include\Observer\Disk</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SRMScopeOnExit.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\Disk\SRMDiskRateSubObserver.h">
+      <Filter>Include\Observer\Disk</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

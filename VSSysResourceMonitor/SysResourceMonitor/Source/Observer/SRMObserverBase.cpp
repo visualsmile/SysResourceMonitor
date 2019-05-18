@@ -21,11 +21,6 @@ SRMObserverBase::~SRMObserverBase()
 
 }
 
-bool SRMObserverBase::isChecked()
-{
-	return m_bIsChecked;
-}
-
 void SRMObserverBase::setIsChecked(bool bChecked)
 {
 	m_bIsChecked = bChecked;
@@ -38,17 +33,32 @@ void SRMObserverBase::actionStateChanged()
 	if (!pAction)
 		return;
 
-	if (isChecked())
+	if (m_bIsChecked)
 		pAction->setIcon(QIcon(/*":/Images/UnCheck.png"*/));
 	else
 		pAction->setIcon(QIcon(":/Images/Check.png"));
 
-	setIsChecked(!isChecked());
+	setIsChecked(!m_bIsChecked);
+}
+
+int SRMObserverBase::checkedCount() const
+{
+	if (m_bIsChecked)
+		return 1;
+	else
+		return 0;
+}
+
+QList<ISRMCustomSettingInf*> SRMObserverBase::customSettingInfList()
+{
+	QList<ISRMCustomSettingInf*> oResultList;
+	oResultList.push_back(this);
+	return oResultList;
 }
 
 void SRMObserverBase::regTrayMenu(QMenu* pTrayMenu, QString sTrayActionName)
 {
-	QAction* pAction = new QAction(isChecked()
+	QAction* pAction = new QAction(m_bIsChecked	
 		? QIcon(":/Images/Check.png") : QIcon(/*":/Images/UnCheck.png"*/), sTrayActionName, this);
 	pTrayMenu->addAction(pAction);
 	connect(pAction, &QAction::triggered, this, &SRMObserverBase::actionStateChanged, Qt::UniqueConnection);

@@ -183,6 +183,8 @@ copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Observer\CPU\SRMCPURateObserver.cpp" />
     <ClCompile Include="Source\Observer\CPU\SRMCPUTemperatureObserver.cpp" />
+    <ClCompile Include="Source\Observer\Disk\SRMDiskRateObserver.cpp" />
+    <ClCompile Include="Source\Observer\Disk\SRMDiskRateSubObserver.cpp" />
     <ClCompile Include="Source\Observer\GPU\Nvidia\SRMNvidiaGPUInfo.cpp" />
     <ClCompile Include="Source\Observer\GPU\SRMGPUMemRateObserver.cpp" />
     <ClCompile Include="Source\Observer\GPU\SRMGPURateObserver.cpp" />
@@ -201,6 +203,9 @@ copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$
     <ClCompile Include="Source\UI\SRMSystemTray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Observer\Disk\SRMDiskRateObserver.h" />
+    <ClInclude Include="Include\Observer\Disk\SRMDiskRateSubObserver.h" />
+    <ClInclude Include="Include\SRMScopeOnExit.h" />
     <ClInclude Include="Include\UI\SRMHelpDialog.h" />
     <QtMoc Include="..\..\VSFloatingWidget\VSFloatingWidget\Include\VSFloatingWidget.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\include</IncludePath>

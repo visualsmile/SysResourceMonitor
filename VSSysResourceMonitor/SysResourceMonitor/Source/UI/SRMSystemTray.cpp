@@ -169,7 +169,7 @@ void SRMSystemTray::createDeskBandMenu(QMenu* pTrayMenu)
 
 void SRMSystemTray::createOptionMenu(QMenu* pTrayMenu)
 {
-	SRMModuleSubject::getInstance()->regTrayMenu(pTrayMenu);
+	SRMModuleSubject::getInstance()->doRegTrayMenu(pTrayMenu);
 }
 
 void SRMSystemTray::createServiceMenu(QMenu* pTrayMenu)
