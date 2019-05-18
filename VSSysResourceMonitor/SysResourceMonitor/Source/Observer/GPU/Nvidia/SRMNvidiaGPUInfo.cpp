@@ -1,18 +1,39 @@
 #include <QMessageBox>
 #include "Observer/GPU/Nvidia/SRMNvidiaGPUInfo.h"
 
-//************************************
-// Method:    getInstance
-// FullName:  SRMGPUInfo::getInstance
-// Access:    public 
-// Returns:   SRMGPUInfo*
-// Qualifier:
-// Note:      
-//************************************
-SRMNvidiaGPUInfo* SRMNvidiaGPUInfo::getInstance()
+int SRMNvidiaGPUInfo::getGPUCount()
+{
+	return m_nDisplayCardCount;
+}
+
+int SRMNvidiaGPUInfo::getGPURate(int nIndex)
+{
+	DISPLAY_INFO oInfo;
+	this->GetDisplayInfo(nIndex, &oInfo);
+	return oInfo.nGpuUsages[0];
+}
+
+int SRMNvidiaGPUInfo::getMemRate(int nIndex)
+{
+	DISPLAY_INFO oInfo;
+	this->GetDisplayInfo(nIndex, &oInfo);
+	return 1.0* (oInfo.dwTotalMemory - oInfo.dwFreeMemory) / oInfo.dwTotalMemory * 100;
+}
+
+int SRMNvidiaGPUInfo::getTemperature(int nIndex)
+{
+	NvGPUThermalSettings oInfo;
+	this->GetThermal(nIndex, &oInfo);
+	return oInfo.Sensor[0].CurrentTemp;
+}
+
+SRMGPUInfoInf* SRMNvidiaGPUInfo::createGPUInfoInf()
 {
 	static SRMNvidiaGPUInfo s_oSRMGPUInfo;
-	return &s_oSRMGPUInfo;
+	if (s_oSRMGPUInfo.isValid())
+		return &s_oSRMGPUInfo;
+	else
+		return nullptr;
 }
 
 //************************************

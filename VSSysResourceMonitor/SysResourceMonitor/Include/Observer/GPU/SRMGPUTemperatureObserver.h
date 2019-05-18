@@ -5,12 +5,7 @@
 /************************************************************************/
 #include "Observer/SRMObserverBase.h"
 
-enum EnGPUType
-{
-	egtNune = 0,
-	egtNvidia,
-	egtAMD
-};
+class SRMGPUInfoInf;
 
 class SRMGPUTemperatureObserver : public SRMObserverBase
 {
@@ -31,10 +26,7 @@ public:
 	QString customSettingDescription() override;
 
 private:
-	int getGPUTemperature();
-
-private:
-	EnGPUType m_enGPUType;
+	SRMGPUInfoInf* m_pGPUInfoInf;
 };
 
 #endif //SRMGPUTEMPERATUREOBSERVER_H_136B2060_1A58_4DF2_97BB_3CCDFA4DE3E2

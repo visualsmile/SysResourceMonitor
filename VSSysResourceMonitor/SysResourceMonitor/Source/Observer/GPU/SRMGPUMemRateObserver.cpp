@@ -6,7 +6,7 @@
 REG_SRM_OBSERVER(SRMGPUMemRateObserver);
 SRMGPUMemRateObserver::SRMGPUMemRateObserver()
 	: SRMObserverBase("SRMGPUMemRateObserver")
-	, m_enGPUType(egtNune)
+	, m_pGPUInfoInf(nullptr)
 {
 
 }
@@ -18,18 +18,16 @@ SRMGPUMemRateObserver::~SRMGPUMemRateObserver()
 
 bool SRMGPUMemRateObserver::init()
 {
-	if (SRMNvidiaGPUInfo::getInstance()->isValid())
-	{
-		m_enGPUType = egtNvidia;
-		return true;
-	}
+	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();
+	if (!m_pGPUInfoInf)
+		return false;
 
-	return false;
+	return true;
 }
 
 void SRMGPUMemRateObserver::update(int nIndex, VSSharedMemStruct* pSharedMemStruct, QList<QLabel*>& oLabelList)
 {
-	int nCurGPUMemRate = getGPUMamRate();
+	int nCurGPUMemRate = m_pGPUInfoInf->getMemRate(0);
 
 	static VSShareMemTextNode oValueNode(0, 0, 0, L"0%");
 	QColor oCurColor = fillCollorByValue(nCurGPUMemRate, &oValueNode);
@@ -59,17 +57,5 @@ int SRMGPUMemRateObserver::order()
 QString SRMGPUMemRateObserver::customSettingDescription()
 {
 	return QString::fromStdWString(L"ÏÔ´æÊ¹ÓÃ:");
-}
-
-int SRMGPUMemRateObserver::getGPUMamRate()
-{
-	if (m_enGPUType == egtNvidia)
-	{
-		DISPLAY_INFO oInfo;
-		SRMNvidiaGPUInfo::getInstance()->GetDisplayInfo(0, &oInfo);
-		return 1.0* (oInfo.dwTotalMemory - oInfo.dwFreeMemory) / oInfo.dwTotalMemory * 100;
-	}
-
-	return 0;
 }
 

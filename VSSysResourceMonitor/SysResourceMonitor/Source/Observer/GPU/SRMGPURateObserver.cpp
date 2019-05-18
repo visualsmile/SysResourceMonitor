@@ -6,7 +6,7 @@
 REG_SRM_OBSERVER(SRMGPURateObserver);
 SRMGPURateObserver::SRMGPURateObserver()
 	: SRMObserverBase("SRMGPURateObserver")
-	, m_enGPUType(egtNune)
+	, m_pGPUInfoInf(nullptr)
 {
 
 }
@@ -18,18 +18,16 @@ SRMGPURateObserver::~SRMGPURateObserver()
 
 bool SRMGPURateObserver::init()
 {
-	if (SRMNvidiaGPUInfo::getInstance()->isValid())
-	{
-		m_enGPUType = egtNvidia;
-		return true;
-	}
+	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();
+	if (!m_pGPUInfoInf)
+		return false;
 
-	return false;
+	return true;
 }
 
 void SRMGPURateObserver::update(int nIndex, VSSharedMemStruct* pSharedMemStruct, QList<QLabel*>& oLabelList)
 {
-	int nCurGPURate = getGPURate();
+	int nCurGPURate = m_pGPUInfoInf->getGPURate(0);
 
 	static VSShareMemTextNode oValueNode(0, 0, 0, L"0%");
 	QColor oCurColor = fillCollorByValue(nCurGPURate, &oValueNode);
@@ -59,17 +57,4 @@ int SRMGPURateObserver::order()
 QString SRMGPURateObserver::customSettingDescription()
 {
 	return QString::fromStdWString(L"GPUÊ¹ÓÃ:");
-}
-
-int SRMGPURateObserver::getGPURate()
-{
-	if (m_enGPUType == egtNvidia)
-	{
-		DISPLAY_INFO oInfo;
-		SRMNvidiaGPUInfo::getInstance()->GetDisplayInfo(0, &oInfo);
-		return oInfo.nGpuUsages[0];
-	}
-
-
-	return 0;
 }

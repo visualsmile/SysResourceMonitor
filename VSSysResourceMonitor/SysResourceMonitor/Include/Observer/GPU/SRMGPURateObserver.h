@@ -5,12 +5,7 @@
 /************************************************************************/
 #include "Observer/SRMObserverBase.h"
 
-enum EnGPUType
-{
-	egtNune = 0,
-	egtNvidia,
-	egtAMD
-};
+class SRMGPUInfoInf;
 
 class SRMGPURateObserver : public SRMObserverBase
 {
@@ -31,10 +26,7 @@ public:
 	QString customSettingDescription() override;
 
 private:
-	int getGPURate();
-
-private:
-	EnGPUType m_enGPUType;
+	SRMGPUInfoInf* m_pGPUInfoInf;
 };
 
 #endif //SRMGPURATEOBSERVER_H_28F5CF90_5408_47D0_B748_FFE7CBAE8E0E

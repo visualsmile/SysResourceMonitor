@@ -3,12 +3,7 @@
 
 #include "Observer/SRMObserverBase.h"
 
-enum EnGPUType
-{
-	egtNune = 0,
-	egtNvidia,
-	egtAMD
-};
+class SRMGPUInfoInf;
 
 class SRMGPUMemRateObserver : public SRMObserverBase
 {
@@ -29,10 +24,7 @@ public:
 	QString customSettingDescription() override;
 
 private:
-	int getGPUMamRate();
-
-private:
-	EnGPUType m_enGPUType;
+	SRMGPUInfoInf* m_pGPUInfoInf;
 };
 
 #endif //SRMGPUMEMRATEOBSERVER_H_3CFC26CB_F532_4FCE_9647_BD495AAF1EDD

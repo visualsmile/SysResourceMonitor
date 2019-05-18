@@ -205,6 +205,7 @@ copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$
   <ItemGroup>
     <ClInclude Include="Include\Observer\Disk\SRMDiskRateObserver.h" />
     <ClInclude Include="Include\Observer\Disk\SRMDiskRateSubObserver.h" />
+    <ClInclude Include="Include\Observer\GPU\SRMGPUInfoInf.h" />
     <ClInclude Include="Include\SRMScopeOnExit.h" />
     <ClInclude Include="Include\UI\SRMHelpDialog.h" />
     <QtMoc Include="..\..\VSFloatingWidget\VSFloatingWidget\Include\VSFloatingWidget.h">

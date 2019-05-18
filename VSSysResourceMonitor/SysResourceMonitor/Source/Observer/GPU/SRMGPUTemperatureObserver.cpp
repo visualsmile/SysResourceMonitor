@@ -5,7 +5,7 @@
 REG_SRM_OBSERVER(SRMGPUTemperatureObserver);
 SRMGPUTemperatureObserver::SRMGPUTemperatureObserver()
 	: SRMObserverBase("SRMGPUTemperatureObserver")
-	, m_enGPUType(egtNune)
+	, m_pGPUInfoInf(nullptr)
 {
 
 }
@@ -17,18 +17,16 @@ SRMGPUTemperatureObserver::~SRMGPUTemperatureObserver()
 
 bool SRMGPUTemperatureObserver::init()
 {
-	if (SRMNvidiaGPUInfo::getInstance()->isValid())
-	{
-		m_enGPUType = egtNvidia;
-		return true;
-	}
+	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();
+	if (!m_pGPUInfoInf)
+		return false;
 
-	return false;
+	return true;
 }
 
 void SRMGPUTemperatureObserver::update(int nIndex, VSSharedMemStruct* pSharedMemStruct, QList<QLabel*>& oLabelList)
 {
-	int nCurGPUTemperature = getGPUTemperature();
+	int nCurGPUTemperature = m_pGPUInfoInf->getTemperature(0);
 
 	static VSShareMemTextNode oValueNode(0, 0, 0, L"0¡æ");
 	QColor oCurColor = fillCollorByValue(nCurGPUTemperature, &oValueNode);
@@ -58,16 +56,4 @@ int SRMGPUTemperatureObserver::order()
 QString SRMGPUTemperatureObserver::customSettingDescription()
 {
 	return QString::fromStdWString(L"GPUÎÂ¶È:");
-}
-
-int SRMGPUTemperatureObserver::getGPUTemperature()
-{
-	if (m_enGPUType == egtNvidia)
-	{
-		NvGPUThermalSettings oInfo;
-		SRMNvidiaGPUInfo::getInstance()->GetThermal(0, &oInfo);
-		return oInfo.Sensor[0].CurrentTemp;
-	}
-
-	return 0;
 }

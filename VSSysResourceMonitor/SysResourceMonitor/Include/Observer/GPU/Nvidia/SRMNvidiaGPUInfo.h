@@ -7,6 +7,7 @@
 *********************************************************************/
 #include <Windows.h>
 #include "SRMError.h"
+#include "Observer/GPU/SRMGPUInfoInf.h"
 
 #define MAX_GPU_NUM						4L		// 监控的GPU个数（NVIDIA定义的最多GPU个数是64，这里最多只监控4个）
 #define MAX_DISPLAY_CARDS               4       // 最多监控4块显卡（暂时应该够了吧）  
@@ -203,13 +204,21 @@ typedef NvStatus(*NvAPI_GPU_GetMemoryInfoType)(const NvDisplayHandle displayHand
 typedef NvStatus(*NvAPI_GetPhysicalGPUsFromDisplayType)(const NvDisplayHandle displayHandle, NvPhysicalGpuHandle* pGpuHandles, unsigned int* pGpuCount);
 
 // 类
-class SRMNvidiaGPUInfo
+class SRMNvidiaGPUInfo : public SRMGPUInfoInf
 {
 public:
-	static SRMNvidiaGPUInfo* getInstance();
-	bool isValid();
+	virtual int getGPUCount() override;
+	virtual int getGPURate(int nIndex) override;
+	virtual int getMemRate(int nIndex) override;
+	virtual int getTemperature(int nIndex) override;
 
 public:
+	static SRMGPUInfoInf* createGPUInfoInf();
+
+private:
+	bool isValid();
+
+private:
 	bool GetDisplayInfo(const int nCardIndex, DISPLAY_INFO* pDisplayInfo);
 	bool GetThermal(const int nCardIndex, NvGPUThermalSettings* info);
 

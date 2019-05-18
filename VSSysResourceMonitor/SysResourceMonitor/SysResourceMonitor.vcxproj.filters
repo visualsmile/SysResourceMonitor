@@ -276,5 +276,8 @@
     <ClInclude Include="Include\Observer\Disk\SRMDiskRateSubObserver.h">
       <Filter>Include\Observer\Disk</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Observer\GPU\SRMGPUInfoInf.h">
+      <Filter>Include\Observer\GPU</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
