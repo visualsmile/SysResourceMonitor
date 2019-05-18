@@ -27,14 +27,28 @@ bool checkUnique()
 	return true;
 }
 
+bool initCOM()
+{
+	if (S_OK != CoInitializeEx(nullptr, COINIT_MULTITHREADED))
+		return false;	
+
+	if (S_OK != CoInitializeSecurity(nullptr, -1, nullptr, nullptr, RPC_C_AUTHN_LEVEL_NONE, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE, 0))
+		return false;
+
+	return true;
+}
+
+void unInitCOM()
+{
+	CoUninitialize();
+}
+
 int main(int argc, char* argv[])
 {
 	// 1. com组件统一初始化，其他地方不要再初始化
-	HRESULT hResult =  CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-	SCOPE_EXIT{ CoUninitialize(); };
-
-	if (hResult != S_OK) 
-		return -1;	
+	if (!initCOM())
+		return -1;
+	SCOPE_EXIT{ unInitCOM(); };
 
 	// 2. 不支持多进程
 	if (!checkUnique()){

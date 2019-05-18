@@ -148,20 +148,9 @@ bool SRMDiskRateObserver::init()
 {
 	// Step 1: --------------------------------------------------
 	// Initialize COM. ------------------------------------------
-	// com组件再main函数中统一初始化
-
 	// Step 2: --------------------------------------------------
 	// Set general COM security levels --------------------------
-	if (S_OK != CoInitializeSecurity(nullptr,
-		-1,
-		nullptr,
-		nullptr,
-		RPC_C_AUTHN_LEVEL_NONE,
-		RPC_C_IMP_LEVEL_IMPERSONATE,
-		nullptr,
-		EOAC_NONE,
-		0))
-		return false;
+	// 前两步，COM组件在main函数中统一初始化，太晚初始化或重复初始化会失败
 
 	// Step 3: ---------------------------------------------------
 	// Obtain the initial locator to WMI -------------------------
