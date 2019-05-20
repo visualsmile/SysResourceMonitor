@@ -28,7 +28,7 @@ void SRMDiskRateSubObserver::update(int nIndex, VSSharedMemStruct* pSharedMemStr
 
 	static VSShareMemTextNode oNameNode(0, 0, 0, L"");
 	fillCollorByValue(m_nRate, &oNameNode);
-	oNameNode.m_sInfo = m_sPartitionName.toStdWString();
+	oNameNode.m_sInfo = L" " + m_sPartitionName.toStdWString() + L" ";
 	pSharedMemStruct->setTextNode(1, nIndex, oNameNode);
 
 	static QPalette oPalette = oLabelList[nIndex]->palette();
