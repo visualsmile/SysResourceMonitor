@@ -41,7 +41,7 @@ VSSysResourceMonitor			主程序目录
 
 1. VSDeskBand
 
-语言：	C++
+语言：	C++， VS2019
 
 工程：	VSDeskBand是一个com组件，编译后生成VSDeskBand.dll
 
@@ -56,25 +56,23 @@ VSSysResourceMonitor			主程序目录
 
 2. VSFloatingWidget
 
-语言：	C++   Qt
+语言：	C++   ，VS2019， Qt5.10
 
 工程：	实现了常见的浮窗功能
 		
 用法：	直接加入项目继承即可
 
-3. SysResourceMonitor
+3. SysResourceMonitor C++， VS2019，Qt5.10
 
 	3.1 SysResourceMonitorService
 	
 		工程：借助第三方的QTservice（https://github.com/qtproject/qt-solutions）；
 		
-		提供windows服务管理，为了避免工具本身请求高权限，将需要管理员权限的模块（目前有处理器温度读取）放到服务中，实现简单的不提权开机自启。
+		提供windows服务管理。主要是避免工具对管理员权限的依赖，将需要管理员权限的模块（目前有处理器温度读取）放到服务中。
 		
 		用法：提供相应的安装、卸载、启动、停止脚本
 		
 	3.2 SysResourceMonitor
-	
-		语言： C++   Qt
 		
 		工程：	主程序
 		
