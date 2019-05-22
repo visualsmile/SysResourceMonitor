@@ -35,7 +35,9 @@ win7 效果（win7默认任务栏透明会导致颜色显示不准，截图中�
 
 ![自定义颜色设置 窗口](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/自定义颜色设置.png)
 
+整体 效果
 
+![整体 效果 ](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/整体.png)
 
 #三个目录（VS2019）：
 
