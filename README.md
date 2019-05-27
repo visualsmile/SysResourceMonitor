@@ -5,6 +5,7 @@
 
 自用
 
+# 更新日志
 *************************************************************************************
 
 2019.5.20
@@ -39,7 +40,7 @@ win7 效果（win7默认任务栏透明会导致颜色显示不准，截图中�
 
 ![整体 效果 ](https://github.com/visualsmile/SysResourceMonitor/blob/master/VSSysResourceMonitor/整体.png)
 
-#三个目录（VS2019）：
+# 三个目录（VS2019）：
 
 VSDeskBand                      独立的DeskBand实现，提供DeskBandOperation，需要优先编译
 
@@ -49,7 +50,7 @@ VSSysResourceMonitor			主程序目录
 
 
 
-#详细说明：
+# 详细说明：
 
 1. VSDeskBand
 
@@ -72,7 +73,7 @@ VSSysResourceMonitor			主程序目录
 
 工程：	实现了常见的浮窗功能
 		
-用法：	直接加入项目继承即可
+用法：	无
 
 3. SysResourceMonitor C++， VS2019，Qt5.12
 
