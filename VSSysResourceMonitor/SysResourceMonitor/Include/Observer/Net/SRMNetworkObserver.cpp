@@ -159,13 +159,13 @@ void SRMNetworkObserver::readNetValue()
 			continue;
 		}
 
-		if (oMibIfrowInfo.dwType != MIB_IF_TYPE_ETHERNET)
-		{
-			continue;
-		}
+		//if (oMibIfrowInfo.dwType != MIB_IF_TYPE_ETHERNET)
+		//{
+		//	continue;
+		//}
 
-		nCurDownload = oMibIfrowInfo.dwInOctets;
-		nCurUpload = oMibIfrowInfo.dwOutOctets;
+		nCurDownload += oMibIfrowInfo.dwInOctets;
+		nCurUpload += oMibIfrowInfo.dwOutOctets;
 	}
 
 	m_dCurDownloadSpeed = nCurDownload - nPreDownload;
