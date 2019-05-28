@@ -171,13 +171,6 @@ SIZE VSDeskBandWindow::getDeskBandWindowMinSize(BOOL bNormalViewMode)
     int nWindowW = 100;
     readSharedMemData();
 
-    // 读取任务栏高度 // 以前是根据任务栏高度来确定字体大小。现在改为根据屏幕分辨率确定字体大小，这个就没用了
-    //RECT oSysTaskBarRect;
-    //HWND hTaskBar = FindWindow(L"Shell_TrayWnd", L"");
-    //UNREFERENCED_PARAMETER(hTaskBar);
-    //GetWindowRect(hTaskBar, &oSysTaskBarRect);
-    //int nTaskHeight = oSysTaskBarRect.bottom - oSysTaskBarRect.top;
-
     // 计算显示所有信息需要的窗口宽度
     if (m_oSharedMemStruct.getColCount() > 0)
     {
@@ -275,39 +268,39 @@ LRESULT VSDeskBandWindow::OnPaint()
 	PAINTSTRUCT oPaintStruct;
 	BeginPaint(m_hDeskBandWindow , &oPaintStruct);
 
-	// 1. 构造临时显示句柄（缓存） fixbug：采用拷贝
-	/*HDC hCacheDC = ::CreateCompatibleDC(oPaintStruct.hdc);
+	// 1. 构造临时显示句柄（缓存）
+	HDC hCacheDC = ::CreateCompatibleDC(oPaintStruct.hdc);
 	HBITMAP hCacheBitMap = ::CreateCompatibleBitmap(oPaintStruct.hdc, RECTWIDTH(oPaintStruct.rcPaint), RECTHEIGHT(oPaintStruct.rcPaint));
-	HBITMAP hOldCacheBitMap = (HBITMAP)SelectObject(hCacheDC, hCacheBitMap);*/
+	HBITMAP hOldCacheBitMap = (HBITMAP)SelectObject(hCacheDC, hCacheBitMap);
 
 	// 2. 设置字体
 	int nTaskBarHeight = calcTaskBarHeight();
 	int nTextHeight = calcTextHeight(nTaskBarHeight);
-	/*HFONT hOldCacheFont = (HFONT)*/SelectObject(/*hCacheDC*/oPaintStruct.hdc, borrowFontInfo(nTextHeight));
+	HFONT hOldCacheFont = (HFONT)SelectObject(hCacheDC, borrowFontInfo(nTextHeight));
 
 	// 3. 绘制背景
-	DrawThemeParentBackground(m_hDeskBandWindow, /*hCacheDC*/oPaintStruct.hdc, &oPaintStruct.rcPaint);
+	DrawThemeParentBackground(m_hDeskBandWindow, hCacheDC, &oPaintStruct.rcPaint);
 
 	// 4. 绘制文字(采用列对齐的方式)
-	//HTHEME hTheme = OpenThemeData(NULL, L"TextStyle");
+	HTHEME hTheme = OpenThemeData(NULL, L"TextStyle");
 	int nLeft = m_oSharedMemStruct.getLeftSpace();
 	int nTop = (nTaskBarHeight - nTextHeight * m_oSharedMemStruct.getRowCount()) / 2;
 	if (nTop < 0) nTop = 0;
 	for (int nCol = 0; nCol < m_oSharedMemStruct.getColCount(); ++nCol)
 	{
-		nLeft += paintOneCol(/*hTheme, *//*hCacheDC*/oPaintStruct.hdc, nLeft, nTop, nCol);
+		nLeft += paintOneCol(hTheme, hCacheDC, nLeft, nTop, nCol);
 		nLeft += m_oSharedMemStruct.getColSpace();
 	}
-	//CloseThemeData(hTheme);
+	CloseThemeData(hTheme);
 
 	// 5. 拷贝缓存图像到窗口上
-	//BitBlt(oPaintStruct.hdc, 0, 0, RECTWIDTH(oPaintStruct.rcPaint), RECTHEIGHT(oPaintStruct.rcPaint), hCacheDC, 0, 0, SRCCOPY);
+	BitBlt(oPaintStruct.hdc, 0, 0, RECTWIDTH(oPaintStruct.rcPaint), RECTHEIGHT(oPaintStruct.rcPaint), hCacheDC, 0, 0, SRCCOPY);
 
 	// 6. 释放资源
-	//SelectObject(hCacheDC, hOldCacheBitMap);
-	//SelectObject(hCacheDC, hOldCacheFont);
-	//DeleteObject(hCacheBitMap);
-	//DeleteDC(hCacheDC);
+	SelectObject(hCacheDC, hOldCacheBitMap);
+	SelectObject(hCacheDC, hOldCacheFont);
+	DeleteObject(hCacheBitMap);
+	DeleteDC(hCacheDC);
 
 	// end
 	EndPaint(m_hDeskBandWindow, &oPaintStruct);
@@ -315,7 +308,7 @@ LRESULT VSDeskBandWindow::OnPaint()
 }
 
 // 绘制一列，并返回列宽
-int VSDeskBandWindow::paintOneCol(/*HTHEME hTheme, */HDC hCacheDC, int nLeft, int nTop, int nCol)
+int VSDeskBandWindow::paintOneCol(HTHEME hTheme, HDC hCacheDC, int nLeft, int nTop, int nCol)
 {
 	int nColWidth = calcColWidth(hCacheDC, nCol);
 
@@ -331,15 +324,15 @@ int VSDeskBandWindow::paintOneCol(/*HTHEME hTheme, */HDC hCacheDC, int nLeft, in
 		GetTextExtentPoint32(hCacheDC, oTextNode.m_sInfo.c_str(), ((int)oTextNode.m_sInfo.length()), &oTextSize);
 		oCurCellRect.bottom = oCurCellRect.top + oTextSize.cy;
 
-		//DTTOPTS oDttOpts = { sizeof(oDttOpts) };
-		//oDttOpts.dwFlags = DTT_COMPOSITED | DTT_TEXTCOLOR;
-		//oDttOpts.crText = PALETTERGB(oTextNode.m_nRed, oTextNode.m_nGreen, oTextNode.m_nBlue);
-		//DrawThemeTextEx(hTheme, hCacheDC, 0, 0, oTextNode.m_sInfo.c_str(), -1, DT_SINGLELINE | DT_CENTER | DT_VCENTER, &oCurCellRect, &oDttOpts);
-		
-		int nOldMode = SetBkMode(hCacheDC, TRANSPARENT);
-		SetTextColor(hCacheDC, PALETTERGB(oTextNode.m_nRed, oTextNode.m_nGreen, oTextNode.m_nBlue));
-		DrawText(hCacheDC, oTextNode.m_sInfo.c_str(), -1, &oCurCellRect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
-		SetBkMode(hCacheDC, nOldMode);
+        DTTOPTS oDttOpts = { sizeof(oDttOpts) };
+        oDttOpts.dwFlags = DTT_COMPOSITED | DTT_TEXTCOLOR;
+        oDttOpts.crText = PALETTERGB(oTextNode.m_nRed, oTextNode.m_nGreen, oTextNode.m_nBlue);
+        DrawThemeTextEx(hTheme, hCacheDC, 0, 0, oTextNode.m_sInfo.c_str(), -1, DT_SINGLELINE | DT_CENTER | DT_VCENTER, &oCurCellRect, &oDttOpts);
+
+		//int nOldMode = SetBkMode(hCacheDC, TRANSPARENT);
+		//SetTextColor(hCacheDC, PALETTERGB(oTextNode.m_nRed, oTextNode.m_nGreen, oTextNode.m_nBlue));
+		//DrawText(hCacheDC, oTextNode.m_sInfo.c_str(), -1, &oCurCellRect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+		//SetBkMode(hCacheDC, nOldMode);
 
 		// 下一行的 top
 		oCurCellRect.top += oTextSize.cy;
@@ -398,8 +391,14 @@ int VSDeskBandWindow::calcTaskBarHeight()
 //************************************
 int VSDeskBandWindow::calcTextHeight(int nTaskBarHeight)
 {
-	if (nTaskBarHeight <= 40)
-		return nTaskBarHeight / 2;
+    if (nTaskBarHeight <= 34)
+    {
+        return nTaskBarHeight >> 1;
+    }
+    else if (nTaskBarHeight <= 40)
+    {
+        return (nTaskBarHeight >> 1) - 2;
+    }
 	else
 		return 20;
 }

@@ -39,7 +39,7 @@ private:
     void setErrorText();
     void readSharedMemData();
     LRESULT OnPaint();
-    int paintOneCol(/*HTHEME hTheme, */HDC hCacheDC, int nLeft, int nTop, int nCol);
+    int paintOneCol(HTHEME hTheme, HDC hCacheDC, int nLeft, int nTop, int nCol);
     HFONT& borrowFontInfo(int nTextHeight);
 
 private:
