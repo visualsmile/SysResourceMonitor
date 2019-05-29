@@ -87,7 +87,7 @@ BOOL VSDeskBandWindow::createNewDeskBandWindow(HWND hParent, HINSTANCE dllInstan
             wc.hInstance = dllInstance;
             wc.hIcon = NULL;
             wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-            wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);// (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
+			wc.hbrBackground = NULL; //(HBRUSH)GetStockObject(BLACK_BRUSH);// (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
             wc.lpszMenuName = NULL;
             wc.lpszClassName = lsVSDeskBandWindowClassName;
 
@@ -267,7 +267,7 @@ LRESULT VSDeskBandWindow::OnPaint()
 	// begin
 	PAINTSTRUCT oPaintStruct;
 	BeginPaint(m_hDeskBandWindow , &oPaintStruct);
-
+	
 	// 1. ππ‘Ï¡Ÿ ±œ‘ ææ‰±˙£®ª∫¥Ê£©
 	HDC hCacheDC = ::CreateCompatibleDC(oPaintStruct.hdc);
 	HBITMAP hCacheBitMap = ::CreateCompatibleBitmap(oPaintStruct.hdc, RECTWIDTH(oPaintStruct.rcPaint), RECTHEIGHT(oPaintStruct.rcPaint));
@@ -277,7 +277,7 @@ LRESULT VSDeskBandWindow::OnPaint()
 	int nTaskBarHeight = calcTaskBarHeight();
 	int nTextHeight = calcTextHeight(nTaskBarHeight);
 	HFONT hOldCacheFont = (HFONT)SelectObject(hCacheDC, borrowFontInfo(nTextHeight));
-
+	
 	// 3. ªÊ÷∆±≥æ∞
 	DrawThemeParentBackground(m_hDeskBandWindow, hCacheDC, &oPaintStruct.rcPaint);
 
