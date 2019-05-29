@@ -391,7 +391,7 @@ int VSDeskBandWindow::calcTaskBarHeight()
 //************************************
 int VSDeskBandWindow::calcTextHeight(int nTaskBarHeight)
 {
-    if (nTaskBarHeight <= 34)
+    if (nTaskBarHeight <= 32)
     {
         return (nTaskBarHeight >> 1) + 2;
     }
