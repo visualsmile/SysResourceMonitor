@@ -1,7 +1,7 @@
 #ifndef SRMGPURATEOBSERVER_H_28F5CF90_5408_47D0_B748_FFE7CBAE8E0E
 #define SRMGPURATEOBSERVER_H_28F5CF90_5408_47D0_B748_FFE7CBAE8E0E
 /************************************************************************/
-/* 显卡速率                                                                     */
+/* GPU使用率                                                                     */
 /************************************************************************/
 #include "Observer/SRMObserverBase.h"
 

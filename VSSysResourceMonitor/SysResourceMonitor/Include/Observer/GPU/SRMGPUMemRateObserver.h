@@ -1,6 +1,8 @@
 #ifndef SRMGPUMEMRATEOBSERVER_H_3CFC26CB_F532_4FCE_9647_BD495AAF1EDD
 #define SRMGPUMEMRATEOBSERVER_H_3CFC26CB_F532_4FCE_9647_BD495AAF1EDD
-
+/************************************************************************/
+/* œ‘¥Ê π”√¬                                                                      */
+/************************************************************************/
 #include "Observer/SRMObserverBase.h"
 
 class SRMGPUInfoInf;
