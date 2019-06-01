@@ -185,6 +185,7 @@ copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$
     <ClCompile Include="Source\Observer\CPU\SRMCPUTemperatureObserver.cpp" />
     <ClCompile Include="Source\Observer\Disk\SRMDiskRateObserver.cpp" />
     <ClCompile Include="Source\Observer\Disk\SRMDiskRateSubObserver.cpp" />
+    <ClCompile Include="Source\Observer\GPU\ATI\SRMATIGPUInfo.cpp" />
     <ClCompile Include="Source\Observer\GPU\Nvidia\SRMNvidiaGPUInfo.cpp" />
     <ClCompile Include="Source\Observer\GPU\SRMGPUMemRateObserver.cpp" />
     <ClCompile Include="Source\Observer\GPU\SRMGPURateObserver.cpp" />
@@ -205,6 +206,7 @@ copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$
   <ItemGroup>
     <ClInclude Include="Include\Observer\Disk\SRMDiskRateObserver.h" />
     <ClInclude Include="Include\Observer\Disk\SRMDiskRateSubObserver.h" />
+    <ClInclude Include="Include\Observer\GPU\ATI\SRMATIGPUInfo.h" />
     <ClInclude Include="Include\Observer\GPU\SRMGPUInfoInf.h" />
     <ClInclude Include="Include\SRMScopeOnExit.h" />
     <ClInclude Include="Include\UI\SRMHelpDialog.h" />

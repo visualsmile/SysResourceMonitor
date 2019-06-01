@@ -1,6 +1,7 @@
 #include "Observer/GPU/SRMGPUTemperatureObserver.h"
 #include "Observer/SRMModuleSubject.h"
 #include "Observer/GPU/Nvidia/SRMNvidiaGPUInfo.h"
+#include "Observer\GPU\ATI\SRMATIGPUInfo.h"
 
 REG_SRM_OBSERVER(SRMGPUTemperatureObserver);
 SRMGPUTemperatureObserver::SRMGPUTemperatureObserver()
@@ -18,6 +19,9 @@ SRMGPUTemperatureObserver::~SRMGPUTemperatureObserver()
 bool SRMGPUTemperatureObserver::init()
 {
 	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();
+    if (!m_pGPUInfoInf)
+        m_pGPUInfoInf = SRMATIGPUInfo::createGPUInfoInf();
+
 	if (!m_pGPUInfoInf)
 		return false;
 

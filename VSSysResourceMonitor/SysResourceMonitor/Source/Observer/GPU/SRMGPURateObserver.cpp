@@ -2,6 +2,7 @@
 #include "Observer/GPU/SRMGPURateObserver.h"
 #include "Observer/SRMModuleSubject.h"
 #include "Observer/GPU/Nvidia/SRMNvidiaGPUInfo.h"
+#include "Observer\GPU\ATI\SRMATIGPUInfo.h"
 
 REG_SRM_OBSERVER(SRMGPURateObserver);
 SRMGPURateObserver::SRMGPURateObserver()
@@ -19,6 +20,9 @@ SRMGPURateObserver::~SRMGPURateObserver()
 bool SRMGPURateObserver::init()
 {
 	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();
+    if (!m_pGPUInfoInf)
+        m_pGPUInfoInf = SRMATIGPUInfo::createGPUInfoInf();
+
 	if (!m_pGPUInfoInf)
 		return false;
 

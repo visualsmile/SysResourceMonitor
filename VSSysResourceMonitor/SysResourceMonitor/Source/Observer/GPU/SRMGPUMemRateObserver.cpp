@@ -2,6 +2,7 @@
 #include "Observer/GPU/SRMGPUMemRateObserver.h"
 #include "Observer/SRMModuleSubject.h"
 #include "Observer/GPU/Nvidia/SRMNvidiaGPUInfo.h"
+#include "Observer\GPU\ATI\SRMATIGPUInfo.h"
 
 REG_SRM_OBSERVER(SRMGPUMemRateObserver);
 SRMGPUMemRateObserver::SRMGPUMemRateObserver()
@@ -19,7 +20,10 @@ SRMGPUMemRateObserver::~SRMGPUMemRateObserver()
 bool SRMGPUMemRateObserver::init()
 {
 	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();
-	if (!m_pGPUInfoInf)
+    //if (!m_pGPUInfoInf) // ATI显卡没有提供显存使用读取接口
+    //    m_pGPUInfoInf = SRMATIGPUInfo::createGPUInfoInf();
+
+    if (!m_pGPUInfoInf)
 		return false;
 
 	return true;

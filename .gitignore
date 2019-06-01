@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+/VSDeskBand/.vs/VSDeskBand/v16
+/VSDeskBand/VSDeskBand/x64
+/VSDeskBand/VSDeskBand/VSDeskBand.vcxproj.user
+/VSDeskBand/x64
+/VSDeskBand/VSDeskBandOperation/x64
+/VSDeskBand/VSDeskBandTest/x64
+/VSSysResourceMonitor/.vs/SysResourceMonitor/v16
+/VSSysResourceMonitor/SysResourceMonitor/GeneratedFiles
+/VSSysResourceMonitor/SysResourceMonitor/x64
+/VSSysResourceMonitor/SysResourceMonitorService/debug
+/VSSysResourceMonitor/SysResourceMonitorService/GeneratedFiles
+/VSSysResourceMonitor/SysResourceMonitorService/release
+/VSSysResourceMonitor/SysResourceMonitorService/x64
+/VSSysResourceMonitor/x64

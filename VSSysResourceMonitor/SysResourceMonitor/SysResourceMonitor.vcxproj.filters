@@ -83,6 +83,12 @@
     <Filter Include="Source\Observer\Disk">
       <UniqueIdentifier>{74f7a375-912b-4b99-985c-fe90085c5706}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Observer\GPU\ATI">
+      <UniqueIdentifier>{7baa043e-e82f-49bc-90cf-840ae35230a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Observer\GPU\ATI">
+      <UniqueIdentifier>{0afbf484-74a7-4a25-bbe9-ea153b8bc55c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Include\SysResourceMonitor.h">
@@ -214,6 +220,9 @@
     <ClCompile Include="Source\Observer\Disk\SRMDiskRateSubObserver.cpp">
       <Filter>Source\Observer\Disk</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Observer\GPU\ATI\SRMATIGPUInfo.cpp">
+      <Filter>Source\Observer\GPU\ATI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\SRMConfig.h">
@@ -278,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="Include\Observer\GPU\SRMGPUInfoInf.h">
       <Filter>Include\Observer\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Observer\GPU\ATI\SRMATIGPUInfo.h">
+      <Filter>Include\Observer\GPU\ATI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
