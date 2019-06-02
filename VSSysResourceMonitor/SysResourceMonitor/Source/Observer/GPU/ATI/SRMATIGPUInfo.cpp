@@ -112,10 +112,10 @@ void SRMATIGPUInfo::init()
     m_pFun_ADL_Adapter_NumberOfAdapters_Get = (ADL_ADAPTER_NUMBEROFADAPTERS_GET)GetProcAddress(m_hATIApiDll, "ADL_Adapter_NumberOfAdapters_Get");
     m_pFun_ADL_Overdrive5_Temperature_Get = (ADL_OVERDRIVE5_TEMPERATURE_GET)GetProcAddress(m_hATIApiDll, "ADL_Overdrive5_Temperature_Get");
     m_pFun_ADL_Overdrive5_CurrentActivity_Get = (ADL_OVERDRIVE5_CURRENTACTIVITY_GET)GetProcAddress(m_hATIApiDll, "ADL_Overdrive5_CurrentActivity_Get");
-    m_pFun_ADL_Adapter_AdapterInfo_Get = (ADL_ADAPTER_ADAPTERINFO_GET)GetProcAddress(m_hATIApiDll, "ADL_Display_ColorCaps_Get");
+    m_pFun_ADL_Adapter_AdapterInfo_Get = (ADL_ADAPTER_ADAPTERINFO_GET)GetProcAddress(m_hATIApiDll, "ADL_Adapter_AdapterInfo_Get");
     m_pFun_ADL_Adapter_MemoryInfo_Get = (ADL_ADAPTER_MEMORYINFO_GET)GetProcAddress(m_hATIApiDll, "ADL_Adapter_MemoryInfo_Get");
     //m_pFun_ADL_Overdrive5_FanSpeed_Get = (ADL_OVERDRIVE5_FANSPEED_GET)GetProcAddress(m_hATIApiDll, "ADL_Overdrive5_FanSpeed_Get");
-    //m_pFun_ADL_Display_ColorCaps_Get = (ADL_DISPLAY_COLORCAPS_GET)GetProcAddress(m_hATIApiDll, "ADL_Adapter_AdapterInfo_Get");
+    //m_pFun_ADL_Display_ColorCaps_Get = (ADL_DISPLAY_COLORCAPS_GET)GetProcAddress(m_hATIApiDll, "ADL_Display_ColorCaps_Get");
     //m_pFun_ADL_Display_Color_Get = (ADL_DISPLAY_COLOR_GET)GetProcAddress(m_hATIApiDll, "ADL_Display_Color_Get");
     //m_pFun_ADL_Display_Color_Set = (ADL_DISPLAY_COLOR_SET)GetProcAddress(m_hATIApiDll, "ADL_Display_Color_Set");
     //m_pFun_ADL_Display_DisplayInfo_Get = (ADL_DISPLAY_DISPLAYINFO_GET)GetProcAddress(m_hATIApiDll, "ADL_Display_DisplayInfo_Get");
@@ -144,9 +144,7 @@ void SRMATIGPUInfo::init()
     if (m_nAdaptersNumber <= 0)
         return;
 
-    int nAdapterInfosByteSize = sizeof(AdapterInfo) * m_nAdaptersNumber;
-    m_oAdapterInfos.resize(m_nAdaptersNumber);
-    if (m_pFun_ADL_Adapter_AdapterInfo_Get(&m_oAdapterInfos[0], nAdapterInfosByteSize) != ADL_OK)
+    if (m_pFun_ADL_Adapter_AdapterInfo_Get(m_oAdapterInfos, sizeof(AdapterInfo) * m_nAdaptersNumber) != ADL_OK)
         return;
 
     m_bIsValid = true;
@@ -154,12 +152,13 @@ void SRMATIGPUInfo::init()
 
 void SRMATIGPUInfo::unInit()
 {
+    m_bIsValid = false;
     m_nAdaptersNumber = 0;
-    m_oAdapterInfos.resize(0);
 
     if (m_hATIApiDll)
     {
         FreeLibrary(m_hATIApiDll);
+        m_hATIApiDll = nullptr;
     }
 }
 
