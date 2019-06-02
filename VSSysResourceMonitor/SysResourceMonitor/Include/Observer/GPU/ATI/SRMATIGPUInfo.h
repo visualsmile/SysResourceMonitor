@@ -13,20 +13,21 @@ ADL 没有提供显存信息读取接口
 #include "Observer\GPU\ATI\ADL\adl_sdk.h"
 #include "Observer\GPU\SRMGPUInfoInf.h"
 #include <windows.h>
+#include <QVector>
 
 // API定义
 typedef int (*ADL_MAIN_CONTROL_CREATE) (ADL_MAIN_MALLOC_CALLBACK, int);
 typedef int (*ADL_MAIN_CONTROL_DESTROY) ();
 typedef int (*ADL_ADAPTER_NUMBEROFADAPTERS_GET) (int*);
 typedef int (*ADL_ADAPTER_ADAPTERINFO_GET) (LPAdapterInfo, int);
-typedef int (*ADL_DISPLAY_COLORCAPS_GET) (int, int, int*, int*);
-typedef int (*ADL_DISPLAY_COLOR_GET) (int, int, int, int*, int*, int*, int*, int*);
-typedef int (*ADL_DISPLAY_COLOR_SET) (int, int, int, int);
 typedef int (*ADL_DISPLAY_DISPLAYINFO_GET)	(int, int*, ADLDisplayInfo**, int);
 typedef int (*ADL_OVERDRIVE5_TEMPERATURE_GET) (int, int, ADLTemperature*);
-typedef int (*ADL_OVERDRIVE5_FANSPEED_GET) (int, int, ADLFanSpeedValue*);
 typedef int (*ADL_OVERDRIVE5_CURRENTACTIVITY_GET) (int, ADLPMActivity*);
 typedef int (*ADL_ADAPTER_MEMORYINFO_GET) (int, ADLMemoryInfo*);
+//typedef int (*ADL_DISPLAY_COLORCAPS_GET) (int, int, int*, int*);
+//typedef int (*ADL_DISPLAY_COLOR_GET) (int, int, int, int*, int*, int*, int*, int*);
+//typedef int (*ADL_DISPLAY_COLOR_SET) (int, int, int, int);
+//typedef int (*ADL_OVERDRIVE5_FANSPEED_GET) (int, int, ADLFanSpeedValue*);
 
 class SRMATIGPUInfo : public SRMGPUInfoInf
 {
@@ -61,8 +62,8 @@ private:// API接口指针
 
 private:
     bool m_bIsValid;
-    int m_AdaptersNumber;               // 显卡数量
-    AdapterInfo* m_pAdapterInfos;       // 显卡信息, 这是一个数组
+    int m_nAdaptersNumber;              // 显卡数量
+    QVector<AdapterInfo> m_oAdapterInfos; // 显卡信息, 这是一个数组
     HINSTANCE m_hATIApiDll;             // API dll 句柄
 };
 #endif //SRMATIGPUINFO_H_8ADE5879_B99F_46F9_BC02_D750992626DB

@@ -19,6 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -64,7 +65,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;VSDeskBandOperation.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;VSDeskBandOperation.lib;Iphlpapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
@@ -91,7 +92,8 @@ copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBandOperati
 copy "$(ProjectDir)Resources\SysResourceMonitor_0_RegEditor.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_0_RegEditor.bat"
 copy "$(ProjectDir)Resources\SysResourceMonitor_1_设置开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_1_设置开机自启.bat"
 copy "$(ProjectDir)Resources\SysResourceMonitor_2_取消开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_2_取消开机自启.bat"
-copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$(Configuration)\SRMDefaultConfig.json"</Command>
+copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$(Configuration)\SRMDefaultConfig.json"
+copy "$(ProjectDir)Include\Observer\GPU\Nvidia\NvAPI\amd64\nvapi64.lib" "$(SolutionDir)$(Platform)\$(Configuration)\nvapi64.lib"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -109,7 +111,7 @@ copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;VSDeskBandOperation.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;VSDeskBandOperation.lib;Iphlpapi.lib;nvapi64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
@@ -136,7 +138,8 @@ copy "$(SolutionDir)..\VSDeskBand\$(Platform)\$(Configuration)\VSDeskBandOperati
 copy "$(ProjectDir)Resources\SysResourceMonitor_0_RegEditor.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_0_RegEditor.bat"
 copy "$(ProjectDir)Resources\SysResourceMonitor_1_设置开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_1_设置开机自启.bat"
 copy "$(ProjectDir)Resources\SysResourceMonitor_2_取消开机自启.bat" "$(SolutionDir)$(Platform)\$(Configuration)\SysResourceMonitor_2_取消开机自启.bat"
-copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$(Configuration)\SRMDefaultConfig.json"</Command>
+copy "$(ProjectDir)Resources\SRMDefaultConfig.json" "$(SolutionDir)$(Platform)\$(Configuration)\SRMDefaultConfig.json"
+copy "$(ProjectDir)Include\Observer\GPU\Nvidia\NvAPI\amd64\nvapi64.lib" "$(SolutionDir)$(Platform)\$(Configuration)\nvapi64.lib"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

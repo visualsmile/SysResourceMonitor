@@ -19,15 +19,15 @@ void __stdcall ADL_Main_Memory_Free(void** ppBuffer)
 
 int SRMATIGPUInfo::getGPUCount()
 {
-    return m_AdaptersNumber;
+    return m_nAdaptersNumber;
 }
 
 int SRMATIGPUInfo::getGPURate(int nIndex)
 {
-    if (nIndex >= m_AdaptersNumber)
+    if (nIndex >= m_nAdaptersNumber)
         return 0;
 
-    int iAdapterIndex = m_pAdapterInfos[nIndex].iAdapterIndex;
+    int iAdapterIndex = m_oAdapterInfos[nIndex].iAdapterIndex;
 
     ADLPMActivity m_ADLPMActivity;
     if (m_pFun_ADL_Overdrive5_CurrentActivity_Get(iAdapterIndex, &m_ADLPMActivity) != ADL_OK)
@@ -46,10 +46,10 @@ int SRMATIGPUInfo::getGPURate(int nIndex)
 //************************************
 int SRMATIGPUInfo::getMemRate(int nIndex)
 {
-    if (nIndex >= m_AdaptersNumber)
+    if (nIndex >= m_nAdaptersNumber)
         return 0;
 
-    int iAdapterIndex = m_pAdapterInfos[nIndex].iAdapterIndex;
+    int iAdapterIndex = m_oAdapterInfos[nIndex].iAdapterIndex;
 
     ADLMemoryInfo oADLMemoryInfo;
     if (m_pFun_ADL_Adapter_MemoryInfo_Get(iAdapterIndex, &oADLMemoryInfo) != ADL_OK)
@@ -60,10 +60,10 @@ int SRMATIGPUInfo::getMemRate(int nIndex)
 
 int SRMATIGPUInfo::getTemperature(int nIndex)
 {
-    if (nIndex >= m_AdaptersNumber)
+    if (nIndex >= m_nAdaptersNumber)
         return 0;
 
-    int iAdapterIndex = m_pAdapterInfos[nIndex].iAdapterIndex;
+    int iAdapterIndex = m_oAdapterInfos[nIndex].iAdapterIndex;
     ADLTemperature oADLTemperature;
     if (m_pFun_ADL_Overdrive5_Temperature_Get(iAdapterIndex, 0, &oADLTemperature) != ADL_OK)
         return 0;
@@ -82,6 +82,15 @@ SRMGPUInfoInf* SRMATIGPUInfo::createGPUInfoInf()
 
 SRMATIGPUInfo::SRMATIGPUInfo()
     : m_bIsValid(false)
+    , m_nAdaptersNumber(0)
+    , m_hATIApiDll(nullptr)
+    , m_pFun_ADL_Main_Control_Create(nullptr)
+    , m_pFun_ADL_Main_Control_Destroy(nullptr)
+    , m_pFun_ADL_Adapter_NumberOfAdapters_Get(nullptr)
+    , m_pFun_ADL_Adapter_AdapterInfo_Get(nullptr)
+    , m_pFun_ADL_Overdrive5_CurrentActivity_Get(nullptr)
+    , m_pFun_ADL_Overdrive5_Temperature_Get(nullptr)
+    , m_pFun_ADL_Adapter_MemoryInfo_Get(nullptr)
 {
     init();
 }
@@ -95,13 +104,7 @@ void SRMATIGPUInfo::init()
 {
     m_hATIApiDll = LoadLibrary(L"atiadlxx.dll");
     if (!m_hATIApiDll)
-        m_hATIApiDll = LoadLibrary(L"atiadlxy.dll");
-
-    if (!m_hATIApiDll)
-    {
-        m_bIsValid = false;
         return;
-    }
 
     // APIs initialization
     m_pFun_ADL_Main_Control_Create = (ADL_MAIN_CONTROL_CREATE)GetProcAddress(m_hATIApiDll, "ADL_Main_Control_Create");
@@ -130,45 +133,29 @@ void SRMATIGPUInfo::init()
         //|| !m_pFun_ADL_Display_Color_Set
         //|| !m_pFun_ADL_Display_DisplayInfo_Get
         )
-    {
-        m_bIsValid = false;
         return;
-    }
 
-    // 初始化
     if (m_pFun_ADL_Main_Control_Create(static_cast<ADL_MAIN_MALLOC_CALLBACK>(&ADL_Main_Memory_Alloc), 1) != ADL_OK)
-    {
-        m_bIsValid = false;
         return;
-    }
 
-    // 读取数量
-    if (m_pFun_ADL_Adapter_NumberOfAdapters_Get(&m_AdaptersNumber) != ADL_OK)
-    {
-        m_bIsValid = false;
+    if (m_pFun_ADL_Adapter_NumberOfAdapters_Get(&m_nAdaptersNumber) != ADL_OK)
         return;
-    }
 
-    // 读取显卡信息
-    if (m_AdaptersNumber > 0)
-    {
-        m_pAdapterInfos = static_cast<LPAdapterInfo>(malloc(sizeof(AdapterInfo) * m_AdaptersNumber));
-        memset(m_pAdapterInfos, '\0', sizeof(AdapterInfo) * m_AdaptersNumber);
+    if (m_nAdaptersNumber <= 0)
+        return;
 
-        m_pFun_ADL_Adapter_AdapterInfo_Get(m_pAdapterInfos, sizeof(AdapterInfo) * m_AdaptersNumber);
-    }
+    int nAdapterInfosByteSize = sizeof(AdapterInfo) * m_nAdaptersNumber;
+    m_oAdapterInfos.resize(m_nAdaptersNumber);
+    if (m_pFun_ADL_Adapter_AdapterInfo_Get(&m_oAdapterInfos[0], nAdapterInfosByteSize) != ADL_OK)
+        return;
 
     m_bIsValid = true;
 }
 
 void SRMATIGPUInfo::unInit()
 {
-    m_AdaptersNumber = 0;
-
-    if (m_pAdapterInfos)
-    {
-        delete[]m_pAdapterInfos;
-    }
+    m_nAdaptersNumber = 0;
+    m_oAdapterInfos.resize(0);
 
     if (m_hATIApiDll)
     {
